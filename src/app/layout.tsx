@@ -4,6 +4,7 @@ import './globals.css';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sidebar } from '@/components/Sidebar';
 import { ReactNode } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <body suppressHydrationWarning={true} className={`${inter.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}>
+        <Toaster />
         <SidebarProvider defaultOpen>
           <div className='flex min-h-screen overflow-hidden w-full'>
             <Sidebar />

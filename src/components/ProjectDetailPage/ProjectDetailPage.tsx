@@ -7,6 +7,9 @@ import ClientInfoSheet from './DetailSheet/ClientSheet';
 import VendorSheet from './DetailSheet/VendorSheet';
 import ChannelsSheet from './DetailSheet/ChannelSheet';
 import TeamSheet from './DetailSheet/TeamSheet';
+import { IssueTicketCard } from './IssueTicketCard';
+import { activeTickets } from '@/data/ticketData';
+import { ActiveIssuesSection } from './ActiveIssuesSection';
 
 export default function ProjectDetailPage() {
   return (
@@ -47,7 +50,7 @@ export default function ProjectDetailPage() {
           summary='Active communication channels'
           metrics={[
             { label: 'Active Channels', value: projectStatusData.engagementChannels.length },
-            { label: 'Primary Channel', value: 'Slack' },
+            { label: 'Primary Channel', value: 'Gmail' },
           ]}
           sheetContent={<ChannelsSheet />}
         />
@@ -63,6 +66,8 @@ export default function ProjectDetailPage() {
           sheetContent={<TeamSheet />}
         />
       </div>
+
+      <ActiveIssuesSection />
     </div>
   );
 }
