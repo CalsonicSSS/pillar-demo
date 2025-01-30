@@ -42,10 +42,10 @@ interface IssueTicketCardProps {
 
 export function IssueTicketCard({ ticket, onClick }: IssueTicketCardProps) {
   const PriorityIcon = priorityConfig[ticket.priority].icon;
-  const formattedDate = new Date(ticket.createdAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  });
+  // const formattedDate = new Date(ticket.createdAt).toLocaleDateString('en-US', {
+  //   month: 'short',
+  //   day: 'numeric',
+  // });
 
   return (
     <Card className='group hover:shadow-md transition-all duration-300 cursor-pointer' onClick={onClick}>

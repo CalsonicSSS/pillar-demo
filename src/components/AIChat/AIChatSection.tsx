@@ -5,10 +5,18 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Badge } from '@/components/ui/badge';
 import { useEffect, useRef } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
+
+// Define a type for the code component props
+interface CodeProps extends HTMLAttributes<HTMLElement> {
+  inline?: boolean;
+  className?: string;
+  children?: ReactNode; // Make children optional
+}
 
 // Custom components for ReactMarkdown
 export const MarkdownComponents = {
-  code({ node, inline, className, children, ...props }: any) {
+  code({ inline, className, children, ...props }: CodeProps) {
     const match = /language-(\w+)/.exec(className || '');
     const language = match ? match[1] : '';
 
@@ -52,15 +60,15 @@ export const MarkdownComponents = {
       </pre>
     );
   },
-  // Keep other markdown components the same
-  h1: (props: any) => <h1 className='text-2xl font-bold mt-6 mb-4' {...props} />,
-  h2: (props: any) => <h2 className='text-xl font-bold mt-6 mb-3' {...props} />,
-  h3: (props: any) => <h3 className='text-lg font-bold mt-5 mb-2' {...props} />,
-  p: (props: any) => <p className='mb-4 leading-relaxed' {...props} />,
-  ul: (props: any) => <ul className='mb-4 list-disc pl-6 space-y-2' {...props} />,
-  ol: (props: any) => <ol className='mb-4 list-decimal pl-6 space-y-2' {...props} />,
-  li: (props: any) => <li className='leading-relaxed' {...props} />,
-  blockquote: (props: any) => <blockquote className='border-l-4 border-muted pl-4 italic my-4' {...props} />,
+  // Define types for other markdown components
+  h1: (props: HTMLAttributes<HTMLHeadingElement>) => <h1 className='text-2xl font-bold mt-6 mb-4' {...props} />,
+  h2: (props: HTMLAttributes<HTMLHeadingElement>) => <h2 className='text-xl font-bold mt-6 mb-3' {...props} />,
+  h3: (props: HTMLAttributes<HTMLHeadingElement>) => <h3 className='text-lg font-bold mt-5 mb-2' {...props} />,
+  p: (props: HTMLAttributes<HTMLParagraphElement>) => <p className='mb-4 leading-relaxed' {...props} />,
+  ul: (props: HTMLAttributes<HTMLUListElement>) => <ul className='mb-4 list-disc pl-6 space-y-2' {...props} />,
+  ol: (props: HTMLAttributes<HTMLOListElement>) => <ol className='mb-4 list-decimal pl-6 space-y-2' {...props} />,
+  li: (props: HTMLAttributes<HTMLLIElement>) => <li className='leading-relaxed' {...props} />,
+  blockquote: (props: HTMLAttributes<HTMLQuoteElement>) => <blockquote className='border-l-4 border-muted pl-4 italic my-4' {...props} />,
 };
 
 interface AIChatSectionProps {

@@ -8,6 +8,7 @@ import { CompletedWorkDrawer } from './CompletedWorkDrawer';
 import { CheckCircle2, Server, Rocket, Shield, FileText, Zap, ChevronRight } from 'lucide-react';
 import { CompletedWork, completedWorks } from '@/data/mockCompletedWorkData';
 import { Timeline, TimelineItem } from '@/components/ProjectDetailPage/CompletedWorkSection/Timeline';
+import Image from 'next/image';
 
 const typeConfig = {
   feature: {
@@ -58,7 +59,7 @@ export function CompletedWorkSection() {
       {/* Timeline */}
       <ScrollArea className='relative'>
         <Timeline>
-          {completedWorks.map((work, index) => {
+          {completedWorks.map((work) => {
             const TypeIcon = typeConfig[work.type].icon;
 
             return (
@@ -110,7 +111,7 @@ export function CompletedWorkSection() {
                           <div key={idx} className='relative'>
                             <div className='w-8 h-8 rounded-full overflow-hidden border-2 border-background'>
                               {person.avatar ? (
-                                <img src={person.avatar} alt={person.name} className='w-full h-full object-cover' />
+                                <Image src={person.avatar} alt={person.name} width={100} height={100} className='w-full h-full object-cover' />
                               ) : (
                                 <div className='w-full h-full bg-primary/10 flex items-center justify-center text-xs font-medium'>
                                   {person.name
