@@ -2,14 +2,13 @@
 
 import { Users2, Building2, MessageCircle, UserRoundCog } from 'lucide-react';
 import { StatusCard } from '@/components/ProjectDetailPage/ProjectStatusCard';
-import { projectStatusData } from '@/data/mockData';
+import { projectStatusData } from '@/data/mockProjectData';
 import ClientInfoSheet from './DetailSheet/ClientSheet';
 import VendorSheet from './DetailSheet/VendorSheet';
 import ChannelsSheet from './DetailSheet/ChannelSheet';
 import TeamSheet from './DetailSheet/TeamSheet';
-import { IssueTicketCard } from './IssueTicketCard';
-import { activeTickets } from '@/data/ticketData';
 import { ActiveIssuesSection } from './ActiveIssuesSection';
+import { CompletedWorkSection } from './CompletedWorkSection';
 
 export default function ProjectDetailPage() {
   return (
@@ -68,6 +67,7 @@ export default function ProjectDetailPage() {
       </div>
 
       <ActiveIssuesSection />
+      <CompletedWorkSection />
     </div>
   );
 }

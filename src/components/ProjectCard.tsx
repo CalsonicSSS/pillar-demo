@@ -36,7 +36,7 @@ const ProjectCard = ({ id, title, client, status, progress, startDate, endDate, 
                 variant='outline'
                 className='bg-red-200 text-red-600 animate-pulse' // Add the animation class here
               >
-                {unresolvedRequests} Unresolved
+                {unresolvedRequests} Tickets
               </Badge>
             )}
           </div>

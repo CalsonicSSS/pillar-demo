@@ -9,13 +9,10 @@ import { MessageSquare, AlertTriangle, FileText, Brain, Link, Tag, X, Loader2, S
 import { IssueTicket } from '@/data/ticketData';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { AIChatSection, MarkdownComponents } from '@/components/AIChat/AIChatSection';
-// import { getClaudeResponse } from '@/services/claude';
+import { AIChatSection } from '@/components/AIChat/AIChatSection';
 import { useToast } from '@/hooks/use-toast';
 import { useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
 import { Textarea } from '../ui/textarea';
-import { getClaudeStreamingResponse } from '@/services/claude';
 
 interface TicketDrawerProps {
   ticket: IssueTicket;
@@ -35,15 +32,51 @@ export function TicketDrawer({ ticket: initialTicket, open, onOpenChange }: Tick
 
     setIsLoading(true);
     try {
-      await getClaudeStreamingResponse(input, ticket, (streamedContent) => {
-        setTicket((prev) => ({
-          ...prev,
-          aiSuggestedSolution: {
-            ...prev.aiSuggestedSolution,
-            content: streamedContent,
-          },
-        }));
+      const response = await fetch('/api/claude', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: input, ticket }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        throw new Error('No reader available');
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n').filter((line) => line.trim());
+
+        for (const line of lines) {
+          try {
+            const { content } = JSON.parse(line);
+            setTicket((prev) => ({
+              ...prev,
+              aiSuggestedSolution: {
+                ...prev.aiSuggestedSolution,
+                content: content,
+              },
+            }));
+          } catch (e) {
+            console.warn('Failed to parse line:', e);
+          }
+        }
+      }
+
       setInput('');
     } catch (error) {
       console.error('Error:', error);

@@ -22,7 +22,7 @@ export const projects = [
     startDate: '2024-02-01',
     endDate: 'present',
     teamSize: 12,
-    unresolvedRequests: 4,
+    unresolvedRequests: 5,
     description: 'End-to-end digital transformation including e-commerce platform upgrade and internal systems modernization.',
   },
   {

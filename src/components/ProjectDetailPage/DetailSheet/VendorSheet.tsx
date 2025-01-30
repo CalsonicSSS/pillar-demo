@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { projectStatusData } from '@/data/mockData';
+import { projectStatusData } from '@/data/mockProjectData';
 import { CheckCircle, Clock, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';

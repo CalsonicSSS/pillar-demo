@@ -1,4 +1,4 @@
-import { projectStatusData } from '@/data/mockData';
+import { projectStatusData } from '@/data/mockProjectData';
 import { Mail, MessageSquare } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';

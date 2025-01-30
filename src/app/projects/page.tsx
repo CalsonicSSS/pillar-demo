@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { projects } from '@/data/mockData';
+import { projects } from '@/data/mockProjectData';
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState('all'); // State for filter
